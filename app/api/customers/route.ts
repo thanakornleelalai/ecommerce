@@ -77,8 +77,10 @@ export async function POST(req: NextRequest) {
       );
     }
     console.error("POST /api/customers failed:", err);
+    const message =
+      err instanceof Error ? err.message : "Failed to create customer";
     return NextResponse.json(
-      { error: "Failed to create customer" },
+      { error: `Failed to create customer: ${message}` },
       { status: 500 }
     );
   }
